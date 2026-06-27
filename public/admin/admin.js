@@ -565,9 +565,9 @@ async function loadSectionContent() {
             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="/css/style.css">
             <style>
-              /* White background so all sections are clearly visible for editing */
+              /* Match the real website background so text colours are visible */
               html, body {
-                background: #ffffff !important;
+                background: #070b08 !important;
                 margin: 0;
                 padding: 0;
                 font-family: "Outfit", "Inter", sans-serif;
