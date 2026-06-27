@@ -11,6 +11,32 @@ exports.login = async (req, res) => {
   }
 
   try {
+    // ── Direct env-var admin bypass (works even if DB seed failed) ──
+    const ADMIN_EMAIL    = process.env.ADMIN_EMAIL    || 'admin@mazaohub.com';
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'mazaohub2024';
+
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      const token = jwt.sign(
+        { id: 1, name: 'MazaoHub Admin', email: ADMIN_EMAIL, role: 'admin' },
+        JWT_SECRET,
+        { expiresIn: '24h' }
+      );
+      res.cookie('admin_token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 24 * 60 * 60 * 1000,
+        sameSite: 'strict'
+      });
+      return res.json({
+        success: true,
+        message: 'Login successful',
+        token,
+        user: { id: 1, name: 'MazaoHub Admin', email: ADMIN_EMAIL, role: 'admin' }
+      });
+    }
+    // ────────────────────────────────────────────────────────────────
+
+    // Standard DB lookup for any other users
     const users = await db.query('SELECT * FROM users WHERE email = $1', [email]);
     if (users.length === 0) {
       return res.status(401).json({ success: false, error: 'Invalid email or password' });
@@ -22,31 +48,22 @@ exports.login = async (req, res) => {
       return res.status(401).json({ success: false, error: 'Invalid email or password' });
     }
 
-    // Sign JWT
     const token = jwt.sign(
       { id: user.id, name: user.name, email: user.email, role: user.role },
       JWT_SECRET,
       { expiresIn: '24h' }
     );
-
-    // Set cookie
     res.cookie('admin_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      maxAge: 24 * 60 * 60 * 1000,
       sameSite: 'strict'
     });
-
-    res.json({
+    return res.json({
       success: true,
       message: 'Login successful',
       token,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role
-      }
+      user: { id: user.id, name: user.name, email: user.email, role: user.role }
     });
   } catch (err) {
     console.error('Login error:', err);
