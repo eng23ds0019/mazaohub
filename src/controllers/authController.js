@@ -65,3 +65,65 @@ exports.getMe = (req, res) => {
     user: req.user
   });
 };
+
+// ── Setup / Reset Admin ──────────────────────────────────────────────────────
+// GET /api/auth/setup?key=mazaohub2024
+// Safely creates or resets admin user — protected by secret key
+exports.setup = async (req, res) => {
+  const SETUP_KEY = process.env.SETUP_KEY || 'mazaohub2024';
+  const { key } = req.query;
+
+  if (key !== SETUP_KEY) {
+    return res.status(403).send(`
+      <html><body style="font-family:sans-serif;text-align:center;padding:60px;background:#0d1a10;color:#fff;">
+        <h2 style="color:#ef4444;">❌ Invalid setup key</h2>
+        <p>Access denied. Provide the correct ?key= to run setup.</p>
+      </body></html>
+    `);
+  }
+
+  try {
+    await db.createTables();
+
+    const adminEmail    = process.env.ADMIN_EMAIL    || 'admin@mazaohub.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'Mazao@2024';
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
+    const existing = await db.query('SELECT id FROM users WHERE email = $1', [adminEmail]);
+    if (existing.length === 0) {
+      await db.run(
+        'INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4)',
+        ['MazaoHub Admin', adminEmail, hashedPassword, 'admin']
+      );
+    } else {
+      await db.run(
+        'UPDATE users SET password = $1 WHERE email = $2',
+        [hashedPassword, adminEmail]
+      );
+    }
+
+    return res.send(`
+      <html><body style="font-family:sans-serif;text-align:center;padding:60px;background:#0d1a10;color:#fff;">
+        <h2 style="color:#10b981;">✅ Admin setup complete!</h2>
+        <p style="font-size:18px;margin:20px 0;">Your admin credentials are now active:</p>
+        <table style="margin:0 auto;border-collapse:collapse;font-size:16px;">
+          <tr><td style="padding:10px 20px;color:#9ca3af;text-align:right;">📧 Email:</td>
+              <td style="padding:10px 20px;color:#fff;font-weight:bold;">${adminEmail}</td></tr>
+          <tr><td style="padding:10px 20px;color:#9ca3af;text-align:right;">🔑 Password:</td>
+              <td style="padding:10px 20px;color:#fff;font-weight:bold;">${adminPassword}</td></tr>
+        </table>
+        <a href="/admin" style="display:inline-block;margin-top:30px;padding:14px 36px;background:#10b981;color:#000;font-weight:700;border-radius:10px;text-decoration:none;font-size:16px;">
+          🔐 Go to Admin Login →
+        </a>
+      </body></html>
+    `);
+  } catch (err) {
+    console.error('Setup error:', err);
+    return res.status(500).send(`
+      <html><body style="font-family:sans-serif;text-align:center;padding:60px;background:#0d1a10;color:#fff;">
+        <h2 style="color:#ef4444;">❌ Setup failed</h2>
+        <pre style="color:#f87171;text-align:left;display:inline-block;">${err.message}</pre>
+      </body></html>
+    `);
+  }
+};
