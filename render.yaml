@@ -2,7 +2,7 @@ services:
   - type: web
     name: mazaohub
     env: node
-    buildCommand: npm install && node seed.js
+    buildCommand: npm install
     startCommand: npm start
     plan: free
     envVars:

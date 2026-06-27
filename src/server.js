@@ -50,6 +50,28 @@ async function startServer() {
     await db.initDb();
     await db.createTables();
 
+    // ─── Always ensure admin user exists with correct credentials ───
+    const bcrypt = require('bcryptjs');
+    const adminEmail    = process.env.ADMIN_EMAIL    || 'admin@mazaohub.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'Mazao@2024';
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
+    const existing = await db.query('SELECT id FROM users WHERE email = $1', [adminEmail]);
+    if (existing.length === 0) {
+      await db.run(
+        'INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4)',
+        ['MazaoHub Admin', adminEmail, hashedPassword, 'admin']
+      );
+      console.log(`✅ Admin user created: ${adminEmail}`);
+    } else {
+      await db.run(
+        'UPDATE users SET password = $1 WHERE email = $2',
+        [hashedPassword, adminEmail]
+      );
+      console.log(`✅ Admin credentials synced for: ${adminEmail}`);
+    }
+    // ────────────────────────────────────────────────────────────────
+
     // Discover local network IP for LAN sharing
     const os = require('os');
     const interfaces = os.networkInterfaces();
