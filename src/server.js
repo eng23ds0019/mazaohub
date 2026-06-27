@@ -50,6 +50,17 @@ async function startServer() {
     await db.initDb();
     await db.createTables();
 
+    // Auto-seed database to load all sections, articles, categories and settings
+    try {
+      console.log('🔄 Running database seeder...');
+      const seed = require('../seed');
+      await seed();
+      console.log('✅ Database seeding complete.');
+    } catch (seedErr) {
+      console.error('⚠️ Seeding warning:', seedErr.message);
+    }
+
+
     // ─── Always ensure admin user exists with correct credentials ───
     const bcrypt = require('bcryptjs');
     const adminEmail    = process.env.ADMIN_EMAIL    || 'admin@mazaohub.com';

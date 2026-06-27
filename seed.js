@@ -156,7 +156,12 @@ async function seed() {
   console.log('--- Database Seeding Completed Successfully ---');
 }
 
-seed().catch(err => {
-  console.error('Seeding failed with error:', err);
-  process.exit(1);
-});
+module.exports = seed;
+
+if (require.main === module) {
+  seed().catch(err => {
+    console.error('Seeding failed with error:', err);
+    process.exit(1);
+  });
+}
+
