@@ -65,8 +65,36 @@ document.addEventListener('DOMContentLoaded', () => {
           liveLink.href = `/#/${slug}`;
         }
       }
+      // Also sync live link 2
+      const liveLink2 = document.getElementById('section-live-link2');
+      if (liveLink2 && liveLink) liveLink2.href = liveLink.href;
     });
   }
+
+  // 6b. Section QUICK CARD click handler
+  document.querySelectorAll('.section-quick-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const slug = card.dataset.slug;
+      const label = card.dataset.label;
+      // Highlight active card
+      document.querySelectorAll('.section-quick-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      // Set dropdown value
+      const pageSelect = document.getElementById('section-select-page');
+      if (pageSelect) {
+        pageSelect.value = slug;
+        // Trigger change event so live link updates
+        pageSelect.dispatchEvent(new Event('change'));
+      } else {
+        // Directly load if no dropdown
+        activeEditSection.page_slug = slug;
+        loadSectionContent();
+      }
+      // Scroll smoothly to editor card
+      const editorCard = document.querySelector('.editor-card');
+      if (editorCard) editorCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
 
   // 7. Section editor save handler
   const sectionEditorForm = document.getElementById('section-editor-form');

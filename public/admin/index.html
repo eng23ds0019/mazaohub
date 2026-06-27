@@ -378,8 +378,235 @@
         <!-- 4. PAGE SECTIONS TAB -->
         <section id="panel-sections" class="tab-panel">
 
-          <!-- What does Page Sections edit? Explainer -->
-          <div class="card" style="margin-bottom: 20px; border-left: 4px solid var(--accent); padding: 16px 20px;">
+          <!-- 3-step guide banner -->
+          <div style="background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(16,185,129,0.04));border:1.5px solid rgba(16,185,129,0.25);border-radius:16px;padding:20px 24px;margin-bottom:24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+            <span style="font-size:32px;">✏️</span>
+            <div style="flex:1;min-width:220px;">
+              <strong style="font-size:15px;color:#fff;display:block;margin-bottom:8px;">Edit any part of your website — no coding needed!</strong>
+              <div style="display:flex;gap:0;flex-wrap:wrap;">
+                <div style="display:flex;align-items:center;gap:8px;background:rgba(16,185,129,0.1);border-radius:10px;padding:8px 14px;margin:4px;">
+                  <span style="background:var(--primary);color:#000;font-weight:800;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">1</span>
+                  <span style="font-size:13px;color:#fff;">Click a <strong>section card</strong> below</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;background:rgba(16,185,129,0.1);border-radius:10px;padding:8px 14px;margin:4px;">
+                  <span style="background:var(--primary);color:#000;font-weight:800;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">2</span>
+                  <span style="font-size:13px;color:#fff;">Click any <strong>text in preview</strong> to edit</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;background:rgba(16,185,129,0.1);border-radius:10px;padding:8px 14px;margin:4px;">
+                  <span style="background:var(--primary);color:#000;font-weight:800;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">3</span>
+                  <span style="font-size:13px;color:#fff;">Click <strong style="color:var(--primary);">✅ Save &amp; Publish</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HOMEPAGE SECTION CARDS -->
+          <div style="margin-bottom:28px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+              <span style="font-size:20px;">🏠</span>
+              <h3 style="font-size:15px;font-weight:700;color:#fff;margin:0;">Homepage Sections</h3>
+              <span style="font-size:11px;color:var(--text-muted);background:rgba(255,255,255,0.05);padding:3px 10px;border-radius:20px;">Click any card to edit that part of your homepage</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+              <button type="button" class="section-quick-card" data-slug="home" data-label="🏠 Hero Section">
+                <span class="sqc-icon">🏠</span><span class="sqc-name">Hero Section</span><span class="sqc-sub">Top banner &amp; headline</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="home/why" data-label="🌑 Why Section">
+                <span class="sqc-icon">🌑</span><span class="sqc-name">Why Section</span><span class="sqc-sub">Feed the world</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="offer" data-label="🌿 What We Offer">
+                <span class="sqc-icon">🌿</span><span class="sqc-name">What We Offer</span><span class="sqc-sub">Services overview</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="ai" data-label="🤖 AI Engine">
+                <span class="sqc-icon">🤖</span><span class="sqc-name">AI Engine</span><span class="sqc-sub">AI features block</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="home/agents" data-label="📞 AI Agents">
+                <span class="sqc-icon">📞</span><span class="sqc-name">AI Agents</span><span class="sqc-sub">Call center block</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="engines" data-label="📊 Data Intelligence">
+                <span class="sqc-icon">📊</span><span class="sqc-name">Data Intelligence</span><span class="sqc-sub">Engine stats</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="home/manufacturers" data-label="🏭 Input Manufacturers">
+                <span class="sqc-icon">🏭</span><span class="sqc-name">Input Manufacturers</span><span class="sqc-sub">Partners section</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="home/agribusiness" data-label="🌾 Agribusiness">
+                <span class="sqc-icon">🌾</span><span class="sqc-name">Agribusiness</span><span class="sqc-sub">Outgrower block</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="home/who" data-label="👥 Who We Serve">
+                <span class="sqc-icon">👥</span><span class="sqc-name">Who We Serve</span><span class="sqc-sub">Plot to system</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="global" data-label="🌍 Global Map">
+                <span class="sqc-icon">🌍</span><span class="sqc-name">Global Map</span><span class="sqc-sub">Countries section</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="pricing" data-label="💰 Pricing">
+                <span class="sqc-icon">💰</span><span class="sqc-name">Pricing</span><span class="sqc-sub">Plans &amp; pricing</span>
+              </button>
+              <button type="button" class="section-quick-card" data-slug="home/payments" data-label="💳 Payments">
+                <span class="sqc-icon">💳</span><span class="sqc-name">Payments</span><span class="sqc-sub">Get paid anywhere</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- SUBPAGES CARDS -->
+          <div style="margin-bottom:28px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+              <span style="font-size:20px;">📄</span>
+              <h3 style="font-size:15px;font-weight:700;color:#fff;margin:0;">Main Pages</h3>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+              <button type="button" class="section-quick-card sqc-amber" data-slug="about" data-label="ℹ️ About Page">
+                <span class="sqc-icon">ℹ️</span><span class="sqc-name">About</span><span class="sqc-sub">Company info</span>
+              </button>
+              <button type="button" class="section-quick-card sqc-amber" data-slug="products" data-label="📦 Products Page">
+                <span class="sqc-icon">📦</span><span class="sqc-name">Products</span><span class="sqc-sub">Product listing</span>
+              </button>
+              <button type="button" class="section-quick-card sqc-amber" data-slug="news" data-label="📰 Field Notes">
+                <span class="sqc-icon">📰</span><span class="sqc-name">Field Notes</span><span class="sqc-sub">Blog / News</span>
+              </button>
+              <button type="button" class="section-quick-card sqc-amber" data-slug="report" data-label="📋 Impact Reports">
+                <span class="sqc-icon">📋</span><span class="sqc-name">Impact Reports</span><span class="sqc-sub">Reports page</span>
+              </button>
+              <button type="button" class="section-quick-card sqc-amber" data-slug="global-board-advisors" data-label="🌐 Board Advisors">
+                <span class="sqc-icon">🌐</span><span class="sqc-name">Board Advisors</span><span class="sqc-sub">Leadership page</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Advanced dropdown for Services/Engines/Portfolios -->
+          <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:24px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+              <span style="font-size:18px;">⚙️</span>
+              <div>
+                <strong style="color:#fff;font-size:14px;">Service Pages, Engine Pages &amp; Portfolios</strong>
+                <p style="font-size:12px;color:var(--text-muted);margin:2px 0 0;">Use the dropdown to select a specific service, engine or portfolio page to edit.</p>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <select id="section-select-page" class="select-control" style="flex:1;min-width:240px;font-size:14px;padding:12px 16px;border-radius:10px;">
+                <option value="">— Pick a section to edit —</option>
+                <optgroup label="🏠 Homepage (Scrolling Sections)">
+                  <option value="home">Homepage: Hero Section</option>
+                  <option value="home/why">Homepage: Why Section</option>
+                  <option value="offer">Homepage: What We Offer</option>
+                  <option value="ai">Homepage: AI Engine</option>
+                  <option value="home/agents">Homepage: AI Agents &amp; Call Center</option>
+                  <option value="engines">Homepage: Data Intelligence</option>
+                  <option value="home/manufacturers">Homepage: Input Manufacturers</option>
+                  <option value="home/agribusiness">Homepage: Agribusiness</option>
+                  <option value="home/who">Homepage: Who We Serve</option>
+                  <option value="global">Homepage: Global Map</option>
+                  <option value="pricing">Homepage: Pricing</option>
+                  <option value="home/payments">Homepage: Payments</option>
+                </optgroup>
+                <optgroup label="ℹ️ Main Pages">
+                  <option value="about">About Page</option>
+                  <option value="products">Products Page</option>
+                  <option value="news">Field Notes / Blog</option>
+                  <option value="report">Impact Reports</option>
+                  <option value="global-board-advisors">Board Advisors</option>
+                </optgroup>
+                <optgroup label="💼 Service Pages">
+                  <option value="service/smallholder-farmer-shf">Service: Smallholder Farmer</option>
+                  <option value="service/cooperatives-and-amcos-agricultural-marketing-cooperative-societies">Service: Cooperatives &amp; AMCOS</option>
+                  <option value="service/mid-size-farmer">Service: Mid-size Farmer</option>
+                  <option value="service/plantations-and-commercial-farms">Service: Plantations &amp; Commercial</option>
+                  <option value="service/inputs-dealer">Service: Inputs Dealer</option>
+                  <option value="service/to-input-manufacturer">Service: Input Manufacturer</option>
+                  <option value="service/financial-institutions">Service: Financial Institutions</option>
+                  <option value="service/governments">Service: Governments</option>
+                  <option value="service/to-large-off-takers">Service: Large Off-takers</option>
+                </optgroup>
+                <optgroup label="📊 Crop Intelligence Engines">
+                  <option value="engine/soil">Engine: Soil &amp; Nutrient Data</option>
+                  <option value="engine/nitrogen">Engine: Nitrogen &amp; Fertilizer</option>
+                  <option value="engine/crop-protection">Engine: Crop Protection</option>
+                  <option value="engine/machinery">Engine: Machinery</option>
+                  <option value="engine/climate">Engine: Climate &amp; Environment</option>
+                  <option value="engine/prices">Engine: Crop &amp; Commodity Prices</option>
+                  <option value="engine/yield">Engine: Yield Forecast</option>
+                  <option value="engine/carbon">Engine: Carbon &amp; Sustainability</option>
+                </optgroup>
+                <optgroup label="📦 Product Portfolios">
+                  <option value="portfolio/field-operations-management-module">Portfolio: Field Operations</option>
+                  <option value="portfolio/soil-analysis-and-recommendations-tool">Portfolio: Soil Analysis</option>
+                  <option value="portfolio/ai-powered-agronomy">Portfolio: AI Agronomy</option>
+                  <option value="portfolio/sensors-iot">Portfolio: Sensors &amp; IoT</option>
+                  <option value="portfolio/crop-sourcing-and-traceability-management-system-cropsupplycom">Portfolio: Crop Sourcing</option>
+                  <option value="portfolio/farmer-excellent-centers-fecs">Portfolio: Farmer Centers</option>
+                  <option value="portfolio/uber-for-extension-officers-field-force">Portfolio: Extension Officers</option>
+                  <option value="portfolio/crop-supply-hubs-agiza-mazao">Portfolio: Crop Supply Hubs</option>
+                  <option value="portfolio/demo-farms">Portfolio: Demo Farms</option>
+                </optgroup>
+              </select>
+              <a id="section-live-link" href="/" target="_blank" class="btn btn-secondary" style="white-space:nowrap;padding:12px 20px;font-size:13px;border-radius:10px;">🌐 View Live Page</a>
+            </div>
+          </div>
+
+          <!-- EDITOR CARD -->
+          <div class="card editor-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;">
+              <h2 id="editing-section-title" style="font-size:18px;margin:0;color:#fff;">👆 Select a section above to start editing</h2>
+              <a id="section-live-link2" href="/" target="_blank" class="btn btn-secondary" style="padding:8px 16px;font-size:12px;">🌐 View Live</a>
+            </div>
+
+            <div class="editor-tabs" style="margin-bottom:0;">
+              <button type="button" class="editor-tab active" id="mode-visual-btn" style="font-size:14px;padding:12px 22px;">
+                ✨ Visual Editor <span style="font-size:10px;opacity:0.6;">(beginner — click to edit)</span>
+              </button>
+              <button type="button" class="editor-tab" id="mode-code-btn" style="font-size:14px;padding:12px 22px;">
+                💻 HTML Code <span style="font-size:10px;opacity:0.6;">(advanced)</span>
+              </button>
+            </div>
+
+            <form id="section-editor-form">
+              <div class="form-group" style="margin-top:20px;">
+                <label for="section-title" style="font-size:13px;">Section Title / Label <span style="font-weight:400;color:var(--text-muted);">(optional)</span></label>
+                <input type="text" id="section-title" placeholder="e.g. Homepage Hero Section">
+              </div>
+
+              <!-- 1. Visual WYSIWYG Pane -->
+              <div id="visual-editor-pane" class="editor-pane-content">
+                <div class="visual-toolbar" style="border-radius:10px 10px 0 0;gap:6px;padding:10px 14px;">
+                  <span style="font-size:11px;color:var(--text-muted);margin-right:4px;">Format:</span>
+                  <button type="button" class="vtool-btn" id="vtool-bold" title="Bold"><b>B</b></button>
+                  <button type="button" class="vtool-btn" id="vtool-italic" title="Italic"><i>I</i></button>
+                  <button type="button" class="vtool-btn" id="vtool-underline" title="Underline"><u>U</u></button>
+                  <span class="vtool-sep">|</span>
+                  <span style="font-size:11px;color:var(--text-muted);margin-right:2px;">Align:</span>
+                  <button type="button" class="vtool-btn" id="vtool-align-left" title="Left">◀ Left</button>
+                  <button type="button" class="vtool-btn" id="vtool-align-center" title="Center">☰ Center</button>
+                  <button type="button" class="vtool-btn" id="vtool-align-right" title="Right">Right ▶</button>
+                  <span class="vtool-sep">|</span>
+                  <label style="font-size:11px;color:var(--text-muted);margin:0 2px;display:inline-flex;align-items:center;gap:4px;text-transform:none;font-weight:normal;">🎨 Bg: <input type="color" id="vtool-bg" class="vtool-color-picker" title="Background colour"></label>
+                  <label style="font-size:11px;color:var(--text-muted);margin:0 2px;display:inline-flex;align-items:center;gap:4px;text-transform:none;font-weight:normal;">🖊 Text: <input type="color" id="vtool-color" class="vtool-color-picker" title="Text colour"></label>
+                </div>
+                <div id="visual-editor-frame-container" style="position:relative;border:1px solid var(--border);border-top:none;border-radius:0 0 10px 10px;overflow:hidden;background:#fff;height:520px;">
+                  <iframe id="visual-editor-iframe" style="width:100%;height:100%;border:none;background:#fff;"></iframe>
+                </div>
+              </div>
+
+              <!-- 2. Code Pane -->
+              <div id="code-editor-pane" class="editor-pane-content hide">
+                <div class="form-group">
+                  <label for="section-html">HTML Content <span style="font-weight:400;color:var(--text-muted);">(for developers only)</span></label>
+                  <textarea id="section-html" rows="18" class="code-editor"></textarea>
+                </div>
+              </div>
+
+              <!-- Save button -->
+              <div style="margin-top:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px;background:rgba(16,185,129,0.05);border-radius:12px;border:1px solid rgba(16,185,129,0.15);">
+                <button type="submit" class="btn btn-primary" style="font-size:16px;padding:16px 40px;border-radius:12px;letter-spacing:0.01em;box-shadow:0 4px 20px rgba(16,185,129,0.3);">
+                  ✅ Save &amp; Publish to Website
+                </button>
+                <div style="font-size:13px;color:var(--text-muted);line-height:1.5;">
+                  <strong style="color:#fff;display:block;">Goes live instantly!</strong>
+                  Your changes appear on the website the moment you save.
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
             <div style="display: flex; align-items: flex-start; gap: 16px;">
               <span style="font-size: 22px;">✏️</span>
               <div style="flex:1;">

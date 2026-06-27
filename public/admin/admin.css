@@ -2277,3 +2277,48 @@ body {
   color: var(--text-muted);
 }
 
+
+/* ===== SECTION QUICK CARDS (non-coder grid) ===== */
+.section-quick-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 10px;
+  background: rgba(16,185,129,0.06);
+  border: 1.5px solid rgba(16,185,129,0.18);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+  text-align: center;
+  min-height: 100px;
+}
+.section-quick-card:hover {
+  background: rgba(16,185,129,0.15);
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(16,185,129,0.2);
+}
+.section-quick-card.active {
+  background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(16,185,129,0.1));
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.2), 0 8px 20px rgba(16,185,129,0.25);
+}
+.section-quick-card.sqc-amber {
+  background: rgba(251,191,36,0.05);
+  border-color: rgba(251,191,36,0.2);
+}
+.section-quick-card.sqc-amber:hover {
+  background: rgba(251,191,36,0.13);
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px rgba(251,191,36,0.15);
+}
+.section-quick-card.sqc-amber.active {
+  background: rgba(251,191,36,0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(251,191,36,0.2);
+}
+.sqc-icon { font-size: 26px; line-height: 1; }
+.sqc-name { font-size: 13px; font-weight: 700; color: #fff; font-family: var(--grot); line-height: 1.2; }
+.sqc-sub  { font-size: 10.5px; color: var(--text-muted); line-height: 1.2; }
