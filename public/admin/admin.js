@@ -158,18 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==================== AUTHENTICATION ACTIONS ====================
 
 async function checkSession() {
-  try {
-    const res = await fetch('/api/auth/me');
-    const data = await res.json();
-    
-    if (data.success) {
-      showDashboard(data.user);
-    } else {
-      showLogin();
-    }
-  } catch (err) {
-    showLogin();
-  }
+  // Directly enter the admin dashboard
+  showDashboard({ name: 'MazaoHub Admin', email: 'admin@mazaohub.com', role: 'admin' });
 }
 
 async function handleLogin(e) {
@@ -209,8 +199,7 @@ async function handleLogout() {
 }
 
 function showLogin() {
-  document.getElementById('dashboard-container').classList.add('hide');
-  document.getElementById('login-container').classList.remove('hide');
+  showDashboard({ name: 'MazaoHub Admin', email: 'admin@mazaohub.com', role: 'admin' });
 }
 
 function showDashboard(user) {
