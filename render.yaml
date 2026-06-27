@@ -15,4 +15,4 @@ services:
       - key: ADMIN_EMAIL
         value: admin@mazaohub.com
       - key: ADMIN_PASSWORD
-        value: Mazao@2024
+        value: mazaohub2024
