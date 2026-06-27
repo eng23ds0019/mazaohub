@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MazaoHub - Network Access</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #020b05;
+      color: #e8f5e9;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 10%, rgba(20,200,52,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 680px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 42px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #14c834;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      color: #6b9b72;
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 520px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: rgba(20, 200, 52, 0.04);
+      border: 1px solid rgba(20, 200, 52, 0.2);
+      border-radius: 16px;
+      padding: 24px 20px;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .card:hover {
+      background: rgba(20, 200, 52, 0.08);
+      border-color: rgba(20, 200, 52, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(20, 200, 52, 0.15);
+    }
+
+    .card-icon { font-size: 32px; margin-bottom: 10px; }
+    .card-title { font-size: 14px; font-weight: 600; color: #a3d6a8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .card-url {
+      font-size: 16px;
+      font-weight: 700;
+      color: #14c834;
+      word-break: break-all;
+      font-family: monospace;
+      background: rgba(0,0,0,0.3);
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+
+    .qr-section {
+      background: rgba(20, 200, 52, 0.04);
+      border: 1px solid rgba(20, 200, 52, 0.15);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 24px;
+    }
+
+    .qr-section h3 {
+      font-size: 16px;
+      color: #a3d6a8;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    #qr-canvas {
+      display: block;
+      margin: 0 auto 16px;
+      border-radius: 12px;
+      padding: 12px;
+      background: white;
+    }
+
+    .qr-hint {
+      font-size: 13px;
+      color: #6b9b72;
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(20, 200, 52, 0.08);
+      border: 1px solid rgba(20, 200, 52, 0.25);
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #a3d6a8;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #14c834;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(20,200,52,0.5); }
+      50% { box-shadow: 0 0 0 6px rgba(20,200,52,0); }
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(20,200,52,0.1);
+      margin: 28px 0;
+    }
+
+    .steps {
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .steps h3 {
+      font-size: 15px;
+      color: #a3d6a8;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      background: rgba(20,200,52,0.15);
+      border: 1px solid rgba(20,200,52,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #14c834;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: #a3d6a8;
+      line-height: 1.5;
+      padding-top: 3px;
+    }
+
+    .step-text b { color: #e8f5e9; }
+
+    .login-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(20,200,52,0.15);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 12px;
+      font-size: 14px;
+      color: #6b9b72;
+      text-align: left;
+    }
+
+    .login-box span { color: #14c834; font-weight: 600; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">🌿</div>
+    <h1>MazaoHub</h1>
+    <p class="subtitle">Agritech Precision Advisory Platform — Running Locally</p>
+
+    <div class="cards">
+      <a class="card" id="main-card" href="#" target="_blank">
+        <div class="card-icon">🌐</div>
+        <div class="card-title">Public Website</div>
+        <div class="card-url" id="main-url">Loading...</div>
+      </a>
+      <a class="card" id="admin-card" href="#" target="_blank">
+        <div class="card-icon">🔑</div>
+        <div class="card-title">Admin Panel</div>
+        <div class="card-url" id="admin-url">Loading...</div>
+      </a>
+    </div>
+
+    <div class="qr-section">
+      <h3>📱 Scan with your phone to open on mobile</h3>
+      <canvas id="qr-canvas" width="180" height="180"></canvas>
+      <p class="qr-hint">Point your phone camera at the QR code — no app needed</p>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      <span>Server is live — anyone on your WiFi can connect</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="steps">
+      <h3>📋 How to share with others on the same WiFi</h3>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Make sure everyone is connected to the <b>same WiFi network</b> as this computer.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Share the <b>Network URL</b> (shown above) via WhatsApp, email, or just say it out loud!</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">They open the URL in <b>any browser</b> on their phone or laptop — no installation needed.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">To access the <b>Admin Panel</b>, they go to the Admin URL and log in with:</div>
+      </div>
+    </div>
+
+    <div class="login-box">
+      📧 Email: <span>admin@mazaohub.com</span><br>
+      🔒 Password: <span>admin123</span>
+    </div>
+  </div>
+
+  <!-- QR Code library (pure JS, no CDN dependency needed) -->
+  <script>
+    // Simple QR Code generator using the Google Charts API
+    function getNetworkURL() {
+      // Try to detect the network address from the current page URL
+      const hostname = window.location.hostname;
+      const port = window.location.port || '3000';
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return { main: `http://localhost:${port}`, admin: `http://localhost:${port}/admin`, isLocal: true };
+      }
+      return { main: `http://${hostname}:${port}`, admin: `http://${hostname}:${port}/admin`, isLocal: false };
+    }
+
+    const urls = getNetworkURL();
+
+    document.getElementById('main-url').textContent = urls.main;
+    document.getElementById('admin-url').textContent = urls.admin;
+    document.getElementById('main-card').href = urls.main;
+    document.getElementById('admin-card').href = urls.admin;
+
+    // Generate QR Code using Google Charts
+    const qrCanvas = document.getElementById('qr-canvas');
+    const qrImg = document.createElement('img');
+    qrImg.src = `https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=${encodeURIComponent(urls.main)}&choe=UTF-8`;
+    qrImg.width = 180;
+    qrImg.height = 180;
+    qrImg.style.borderRadius = '8px';
+    qrImg.alt = 'QR Code for ' + urls.main;
+
+    qrImg.onerror = () => {
+      // Fallback: show URL as text if QR fails (offline)
+      qrCanvas.style.display = 'none';
+      qrImg.style.display = 'none';
+      const fallback = document.createElement('p');
+      fallback.style.cssText = 'font-size:14px;color:#14c834;font-family:monospace;padding:20px;';
+      fallback.textContent = urls.main;
+      qrCanvas.parentNode.insertBefore(fallback, qrCanvas.nextSibling);
+    };
+
+    qrCanvas.parentNode.replaceChild(qrImg, qrCanvas);
+  </script>
+</body>
+</html>
