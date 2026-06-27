@@ -11,20 +11,25 @@ async function seed() {
   await db.createTables();
 
   // 2. Create Default Admin User
-  const adminEmail = 'admin@mazaohub.com';
-  const adminPass = 'admin123';
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@mazaohub.com';
+  const adminPass  = process.env.ADMIN_PASSWORD || 'Mazao@2024';
   const hashedPassword = await bcrypt.hash(adminPass, 10);
   
-  // Check if admin user exists
+  // Check if admin user exists — always update password on seed so env var changes take effect
   const existingUsers = await db.query('SELECT * FROM users WHERE email = $1', [adminEmail]);
   if (existingUsers.length === 0) {
     await db.run(
       'INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4)',
       ['MazaoHub Admin', adminEmail, hashedPassword, 'admin']
     );
-    console.log(`Created default admin user: ${adminEmail} / ${adminPass}`);
+    console.log(`✅ Created admin user: ${adminEmail}`);
   } else {
-    console.log('Admin user already exists.');
+    // Update password so env var changes always apply
+    await db.run(
+      'UPDATE users SET password = $1 WHERE email = $2',
+      [hashedPassword, adminEmail]
+    );
+    console.log(`✅ Updated admin password for: ${adminEmail}`);
   }
 
   // 3. Load scraped content
